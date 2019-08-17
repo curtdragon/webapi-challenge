@@ -122,9 +122,12 @@ router.post("/:id/actions", (req, res) => {
 router.put("/:id/actions/:id", (req, res)=> {
     const {id} = req.params;
     const changes = req.body;
+    console.log(req.body)
 
     Actions.update(id, changes)
-    .then
+    .then(action => {
+        res.json(action);
+    })
     .catch(({message})=> {
         message: "Could not update action",
         message
