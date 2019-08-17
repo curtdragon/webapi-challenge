@@ -53,6 +53,19 @@ router.post("/", (req, res) => {
 
 //PUT update existing project
 router.put("/:id", (req, res) => {
+    const {id} = req.params;
+    const updateProject = req.body;
+
+    Projects.update(id, updateProject)
+    .then(projects => {
+        res.status(200).json(projects);
+    })
+    .catch(({message}) => {
+        res.status(500).json({
+            message: "Unable to update project",
+            message
+        })
+    })
 
 })
 
@@ -108,6 +121,7 @@ router.post("/:id/actions", (req, res) => {
 //PUT update a project action
 router.put("/:id/actions/:id", (req, res)=> {
     const {id} = req.params;
+    const changes = req.body;
 
     Actions.update(id, changes)
     .then
