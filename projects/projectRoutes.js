@@ -136,7 +136,9 @@ router.delete("/:id/actions/:id", (req, res) => {
     const {id} = req.params;
 
     Actions.remove(id)
-    .then
+    .then(action => {
+        res.json(action);
+    })
     .catch(({message}) => {
         message: "Could not delete action",
         message
